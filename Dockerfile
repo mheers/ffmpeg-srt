@@ -1,4 +1,4 @@
-ARG base="alpine:3.15.0"
+ARG base="alpine:3.15.4"
 
 FROM --platform=$BUILDPLATFORM ${base} as builder
 
@@ -20,7 +20,7 @@ ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 RUN apk add tar xz
 RUN wget -q https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$(echo $TARGETPLATFORM  | cut -d/ -f2)-static.tar.xz
-RUN tar -xJf ffmpeg-release-$(echo $TARGETPLATFORM  | cut -d/ -f2)-static.tar.xz && cd ffmpeg-5.0-$(echo $TARGETPLATFORM  | cut -d/ -f2)-static && mv ffmpeg ffprobe /usr/local/bin/
+RUN tar -xJf ffmpeg-release-$(echo $TARGETPLATFORM  | cut -d/ -f2)-static.tar.xz && cd ffmpeg-5.*-static && mv ffmpeg ffprobe /usr/local/bin/
 
 FROM ${base}
 
