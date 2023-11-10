@@ -7,16 +7,16 @@ SHELL := /bin/bash
 all: help
 
 ##@ Building
-build: docker ##  Builds the mheers/ffmpeg-srt application (same as 'docker')
+build: docker ##  Builds the mheers/ffmpeg-srt:6.153 application (same as 'docker')
 
-docker: ##  Builds the mheers/ffmpeg-srt application
-	docker buildx build --platform linux/amd64 -t mheers/ffmpeg-srt --output type=docker .
+docker: ##  Builds the mheers/ffmpeg-srt:6.153 application
+	docker buildx build --platform linux/amd64 -t mheers/ffmpeg-srt:6.153 --output type=docker .
 
-docker-arm64: ##  Builds the mheers/ffmpeg-srt application for arm64
-	docker buildx build --platform linux/arm64 -t mheers/ffmpeg-srt --output type=docker .
+docker-arm64: ##  Builds the mheers/ffmpeg-srt:6.153 application for arm64
+	docker buildx build --platform linux/arm64 -t mheers/ffmpeg-srt:6.153 --output type=docker .
 
-docker-multi: ##  Builds the mheers/ffmpeg-srt application for amd64 and arm64
-	docker buildx build --platform linux/amd64,linux/arm64 -t mheers/ffmpeg-srt --push .
+docker-multi: ##  Builds the mheers/ffmpeg-srt:6.153 application for amd64 and arm64
+	docker buildx build --platform linux/amd64,linux/arm64 -t mheers/ffmpeg-srt:6.153 --push .
 
 ##@ Helpers
 

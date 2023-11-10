@@ -1,4 +1,4 @@
-ARG base="alpine:3.15.4"
+ARG base="alpine:3.18.4"
 
 FROM --platform=$BUILDPLATFORM ${base} as builder
 
@@ -7,7 +7,7 @@ RUN apk add wget git tcl cmake make g++ libressl-dev linux-headers
 WORKDIR /src
 
 # install libsrt
-ENV srtVersion="1.4.4"
+ENV srtVersion="1.5.3"
 RUN cd /src && git clone --branch v${srtVersion} https://github.com/Haivision/srt.git libsrt && \
     cd libsrt/ && \
     # ./configure && \
@@ -20,7 +20,7 @@ ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 RUN apk add tar xz
 RUN wget -q https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-$(echo $TARGETPLATFORM  | cut -d/ -f2)-static.tar.xz
-RUN tar -xJf ffmpeg-release-$(echo $TARGETPLATFORM  | cut -d/ -f2)-static.tar.xz && cd ffmpeg-5.*-static && mv ffmpeg ffprobe /usr/local/bin/
+RUN tar -xJf ffmpeg-release-$(echo $TARGETPLATFORM  | cut -d/ -f2)-static.tar.xz && cd ffmpeg-6.*-static && mv ffmpeg ffprobe /usr/local/bin/
 
 FROM ${base}
 
@@ -42,4 +42,4 @@ COPY --from=builder /usr/local/bin/ffmpeg /usr/local/bin/
 COPY --from=builder /usr/local/bin/ffprobe /usr/local/bin/
 
 
-RUN apk add libstdc++ libressl3.4-libcrypto bash
+RUN apk add libstdc++ libressl3.7-libcrypto bash
